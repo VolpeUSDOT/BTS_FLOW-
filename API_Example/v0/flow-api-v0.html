@@ -1,0 +1,458 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Flow - API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Flow - API</h1>
+    <div class="app-desc">This OpenAPI specification document describes the details of the API for data collected under the Freight Logistics Optimization Works (FLOW) program. This data is managed under the stewardship of the USDOT Bureau of Transportation Statistics.</div>
+    <div class="app-desc">More information: <a href="https://www.bts.gov/flow">https://www.bts.gov/flow</a></div>
+    <div class="app-desc">Contact Info: <a href="mailto:btsdataportal@dot.gov">btsdataportal@dot.gov</a></div>
+    <div class="app-desc">Version: 0.1.0</div>
+    <div class="app-desc">BasePath: https://www.c3rs.bts.gov/flow-api/</div>
+
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Port">Port</a></h4>
+  <ul>
+  <li><a href="#getPortInformation"><code><span class="http-method">get</span> /api/v0/port/{portLocode}</code></a></li>
+  <li><a href="#getPorts"><code><span class="http-method">get</span> /api/v0/port</code></a></li>
+  <li><a href="#portDailyData"><code><span class="http-method">get</span> /api/v0/port/{portLocode}/daily</code></a></li>
+  </ul>
+
+  <h1><a name="Port">Port</a></h1>
+  <div class="method"><a name="getPortInformation"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/port/{portLocode}</code></pre></div>
+    <div class="method-summary">List possible demand and supply signals at port (<span class="nickname">getPortInformation</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PortInformation">PortInformation</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "portLocode" : "USSAV",
+  "supplySignals" : [ "CHA20", "CHA20" ],
+  "demandSignals" : [ "OC", "OC" ],
+  "name" : "Port of Savannah, GA"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#PortInformation">PortInformation</a>
+    <h4 class="field-label">404</h4>
+    Port identifier not found
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPorts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/port</code></pre></div>
+    <div class="method-summary">List ports with available data (<span class="nickname">getPorts</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Port">Port</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "portLocode" : "USSAV",
+  "name" : "Port of Savannah, GA"
+}, {
+  "portLocode" : "USSAV",
+  "name" : "Port of Savannah, GA"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="portDailyData"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/port/{portLocode}/daily</code></pre></div>
+    <div class="method-summary">Retrieve daily data (<span class="nickname">portDailyData</span>)</div>
+    <div class="method-notes">Retrieve daily data on demand and signal signals of ports.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">supplySignal (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for supply signal (e.g. MTO for Marine Terminal Slots, CHA20 for Chassis-20ft, CHA40 for Chassis-40ft). </div>      <div class="param">demandSignal (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for demand signal (e.g OC for Ocean Carrier Bookings). </div>      <div class="param">startDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; start-date of window to retrieve information on. </div>      <div class="param">endDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; end-date of window to retrieve information on. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PortDataInformationPort">PortDataInformationPort</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "port" : "USSAV",
+  "supplySignal" : "MTO",
+  "days" : [ {
+    "dateOccurred" : "2023-12-31",
+    "supply" : [ {
+      "dimension" : "TEU",
+      "value" : 3346
+    }, {
+      "dimension" : "TEU",
+      "value" : 3346
+    } ],
+    "demand" : [ null, null ]
+  }, {
+    "dateOccurred" : "2023-12-31",
+    "supply" : [ {
+      "dimension" : "TEU",
+      "value" : 3346
+    }, {
+      "dimension" : "TEU",
+      "value" : 3346
+    } ],
+    "demand" : [ null, null ]
+  } ],
+  "demandSignal" : "OC"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#PortDataInformationPort">PortDataInformationPort</a>
+    <h4 class="field-label">403</h4>
+    Invalid authorization
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Port and/or demand signal and/or supply signal not found
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Invalid request parameter.
+        <a href="#"></a>
+    <h4 class="field-label">429</h4>
+    Request limit reached
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Port"><code>Port</code></a></li>
+    <li><a href="#PortDataInformationPort"><code>PortDataInformationPort</code></a></li>
+    <li><a href="#PortDataInformationPortDay"><code>PortDataInformationPortDay</code></a></li>
+    <li><a href="#PortInformation"><code>PortInformation</code></a></li>
+    <li><a href="#Signal"><code>Signal</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Port"><code>Port</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: USSAV</span></div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Port of Savannah, GA</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PortDataInformationPort"><code>PortDataInformationPort</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">supplySignal (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier for requested supply signal </div>
+          <div class="param-desc"><span class="param-type">example: MTO</span></div>
+<div class="param">demandSignal (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier for requested demand signal </div>
+          <div class="param-desc"><span class="param-type">example: OC</span></div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> UN/LOCODE for requested port </div>
+          <div class="param-desc"><span class="param-type">example: USSAV</span></div>
+<div class="param">days (optional)</div><div class="param-desc"><span class="param-type"><a href="#PortDataInformationPortDay">array[PortDataInformationPortDay]</a></span> Row of data of each day </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PortDataInformationPortDay"><code>PortDataInformationPortDay</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 2023-12-31</span></div>
+<div class="param">supply (optional)</div><div class="param-desc"><span class="param-type"><a href="#Signal">array[Signal]</a></span>  </div>
+<div class="param">demand (optional)</div><div class="param-desc"><span class="param-type"><a href="#Signal">array[Signal]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PortInformation"><code>PortInformation</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of port </div>
+          <div class="param-desc"><span class="param-type">example: Port of Savannah, GA</span></div>
+<div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> UN/LOCODE of port </div>
+          <div class="param-desc"><span class="param-type">example: USSAV</span></div>
+<div class="param">supplySignals (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> list of available supply signals at port </div>
+<div class="param">demandSignals (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> list of available demand signals at port </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Signal"><code>Signal</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dimension (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: TEU</span></div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#double">Double</a></span>  format: double</div>
+          <div class="param-desc"><span class="param-type">example: 3346</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+openapi: "3.0.3"
+info:
+  title: "Flow - API"
+  description: "This OpenAPI specification document describes the details of the API for data collected under the Freight Logistics Optimization Works (FLOW) program. This data is managed under the stewardship of the USDOT Bureau of Transportation Statistics."
+  version: "0.1.0"
+  contact: 
+    email: "btsdataportal@dot.gov"
+    "url": "https://www.bts.gov/flow"
+servers:
+  - url: "https://www.c3rs.bts.gov/flow-api/api"
+paths:
+  /api/v0/port:
+    get:
+      tags:
+        - port
+      summary: "List ports with available data"
+      operationId: "getPorts"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Port"
+  /api/v0/port/{portLocode}:
+    get:
+      tags:
+        - port
+      summary: "List possible demand and supply signals at port"
+      operationId: "getPortInformation"
+      parameters:
+        - name: "portLocode"
+          example: "USSAV"
+          in: "path"
+          required: true
+          description: UN/LOCODE for port location
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/PortInformation"
+        '404':
+          description: "Port identifier not found"
+
+  /api/v0/port/{portLocode}/daily:
+    get:
+      tags:
+        - port
+      summary: Retrieve daily data
+      description: Retrieve daily data on demand and signal signals of ports.
+      operationId: port-daily-data
+      parameters:
+        - name: "portLocode"
+          example: "USSAV"
+          in: "path"
+          required: true
+          description: UN/LOCODE for port location
+          schema:
+            type: "string"
+        - name: "supplySignal"
+          example: "MTO"
+          in: "query"
+          required: true
+          description: Identifier for supply signal (e.g. MTO for Marine Terminal Slots, CHA20 for Chassis-20ft, CHA40 for Chassis-40ft).
+          schema:
+            type: "string"
+        - name: "demandSignal"
+          example: "OC"
+          in: "query"
+          description: Identifier for demand signal (e.g OC for Ocean Carrier Bookings).
+          required: true
+          schema:
+            type: "string"
+        - name: "startDate"
+          example: "2022-01-31"
+          description: start-date of window to retrieve information on.
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "endDate"
+          in: "query"
+          example: "2022-12-31"
+          description: end-date of window to retrieve information on.
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/PortDataInformationPort"
+        '405':
+          description: Invalid request parameter.
+        '403':
+          description: Invalid authorization
+        '404':
+          description: Port and/or demand signal and/or supply signal not found
+        '429':
+          description: Request limit reached
+
+components:
+  schemas:
+    Port:
+      type: "object"
+      properties:
+        portLocode:
+          example: "USSAV"
+          type: "string"
+        name:
+          type: "string"
+          example : "Port of Savannah, GA"
+    PortInformation:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "Name of port"
+          example: "Port of Savannah, GA"
+        portLocode:
+          type: "string"
+          description: "UN/LOCODE of port"
+          example: "USSAV"
+        supplySignals:
+          description: "list of available supply signals at port"
+          type: "array"
+          items:
+            type: "string"
+            example: "CHA20"
+        demandSignals:
+          description: "list of available demand signals at port"
+          type: "array"
+          items:
+            type: "string"
+            example: "OC"
+    Signal:
+      type: "object"
+      properties:
+        dimension:
+          type: "string"
+          example: "TEU"
+        value:
+          type: "number"
+          format: "double"
+          example: "3346"
+    PortDataInformationPortDay:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          example: "2023-12-31"
+        supply:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Signal"
+        demand:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Signal"
+
+    PortDataInformationPort:
+      type: "object"
+      properties:
+        supplySignal:
+          description: "Identifier for requested supply signal"
+          type: "string"
+          example: "MTO"
+        demandSignal:
+          description: "Identifier for requested demand signal"
+          type: "string"
+          example: "OC"
+        port:
+          description: "UN/LOCODE for requested port"
+          type: "string"
+          example: "USSAV"
+        days:
+          description: "Row of data of each day"
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PortDataInformationPortDay"
+ 
