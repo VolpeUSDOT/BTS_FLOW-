@@ -1,0 +1,375 @@
+openapi: "3.0.3"
+info:
+  title: "Flow - API"
+  description: "This OpenAPI specification document describes the details of the API for data collected under the Freight Logistics Optimization Works (FLOW) program. This data is managed under the stewardship of the USDOT Bureau of Transportation Statistics."
+  version: "1.0.0"
+  contact: 
+    email: "btsdataportal@dot.gov"
+    "url": "https://www.bts.gov/flow"
+servers:
+  - url: "https://www.c3rs.bts.gov/flow-api/api"
+paths:
+  /api/v1/port:
+    get:
+      summary: "Get port list"
+      description: "Retrieve the list of ports for which data exists"
+      operationId: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Port"
+  /api/v1/port/{portLocode}:
+    get:
+      summary: "Get information available at a port"
+      description: "Retrieve the available signals for a port"
+      operationId: ""
+      parameters:
+        - name: "portLocode"
+          in: "path"
+          required: true
+          description: "UN/LOCODE for port location"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PortInformation"
+  /api/v1/port/{portLocode}/coverage:
+    get:
+      summary: "Get coverage information"
+      description: "Retrieve information of the current coverage of supply and demand\
+        \ signals for a port or gateway"
+      operationId: ""
+      parameters:
+        - name: "portLocode"
+          in: "path"
+          required: true
+          description: "UN/LOCODE for port location"
+          schema:
+            type: "string"
+        - name: "signal"
+          in: "query"
+          required: true
+          description: "Identifier for signal"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "startDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 start local date for range"
+          schema:
+            type: "string"
+            format: "date"
+        - name: "endDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 end local date for range"
+          schema:
+            type: "string"
+            format: "date"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CoverageDataModelV1"
+  /api/v1/port/{portLocode}/daily:
+    get:
+      summary: "Get daily data"
+      description: "Retrieve daily data on a supply and demand signals for a port\
+        \ or gateway"
+      operationId: ""
+      parameters:
+        - name: "portLocode"
+          in: "path"
+          required: true
+          description: "UN/LOCODE for port location"
+          schema:
+            type: "string"
+        - name: "signal"
+          in: "query"
+          required: true
+          description: "Identifier for signal"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "movementType"
+          in: "query"
+          required: false
+          description: "Identifier for movementType: RAIL, TRUCK, ALL"
+          schema:
+            type: "string"
+            default: "ALL"
+        - name: "containerType"
+          in: "query"
+          required: false
+          description: "Identifier for containerType: REEFER, DRY, ALL"
+          schema:
+            type: "string"
+            default: "ALL"
+        - name: "haulageType"
+          in: "query"
+          required: false
+          description: "Identifier for haulageType: MH, CH, ALL"
+          schema:
+            type: "string"
+            default: "ALL"
+        - name: "startDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 start local date for range"
+          schema:
+            type: "string"
+            format: "date"
+        - name: "endDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 end local date for range"
+          schema:
+            type: "string"
+            format: "date"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PortDataModelV1"
+  /api/v1/port/{portLocode}/throughput:
+    get:
+      summary: "Get througput information"
+      description: "Retrieve throughput (gate momevents) for a port or gateway"
+      operationId: ""
+      parameters:
+        - name: "portLocode"
+          in: "path"
+          required: true
+          description: "UN/LOCODE for port location"
+          schema:
+            type: "string"
+        - name: "startDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 start local date for range"
+          schema:
+            type: "string"
+            format: "date"
+        - name: "endDate"
+          in: "query"
+          required: false
+          description: "ISO-8601 end local date for range"
+          schema:
+            type: "string"
+            format: "date"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ThroughputDataModelV1"
+components:
+  schemas:
+    Port:
+      type: "object"
+      properties:
+        portLocode:
+          type: "string"
+        name:
+          type: "string"
+    PortInformation:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        portLocode:
+          type: "string"
+        signals:
+          type: "array"
+          items:
+            type: "string"
+    Coverage:
+      type: "object"
+      properties:
+        weekStart:
+          type: "string"
+          format: "date"
+        unlocode:
+          type: "string"
+        note:
+          type: "string"
+        sector:
+          type: "string"
+          enum:
+            - "BCO"
+            - "OC"
+            - "MTO"
+            - "CHA"
+            - "ALL"
+            - "label"
+        coverage:
+          type: "string"
+    CoverageDataModelV1:
+      type: "object"
+      properties:
+        portLocode:
+          type: "string"
+        portName:
+          type: "string"
+        fromDate:
+          type: "string"
+          format: "date"
+        toDate:
+          type: "string"
+          format: "date"
+        MTO:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Coverage"
+        BCO:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Coverage"
+        CHA:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Coverage"
+        OC:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Coverage"
+    BigDecimal:
+      type: "object"
+      properties: { }
+    MtoReleasable:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          format: "date"
+        port:
+          type: "string"
+        teus:
+          $ref: "#/components/schemas/BigDecimal"
+    BcoReleasable:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          format: "date"
+        port:
+          type: "string"
+        teus:
+          $ref: "#/components/schemas/BigDecimal"
+        container20:
+          $ref: "#/components/schemas/BigDecimal"
+        container40:
+          $ref: "#/components/schemas/BigDecimal"
+        containerMovement:
+          type: "string"
+    ChaReleasable:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          format: "date"
+        port:
+          type: "string"
+        chassis20:
+          $ref: "#/components/schemas/BigDecimal"
+        chassis40:
+          $ref: "#/components/schemas/BigDecimal"
+    OcReleasable:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          format: "date"
+        port:
+          type: "string"
+        teus:
+          $ref: "#/components/schemas/BigDecimal"
+        container20:
+          $ref: "#/components/schemas/BigDecimal"
+        container40:
+          $ref: "#/components/schemas/BigDecimal"
+        containerMovement:
+          type: "string"
+        haulageType:
+          type: "string"
+    PortDataModelV1:
+      type: "object"
+      properties:
+        portLocode:
+          type: "string"
+        portName:
+          type: "string"
+        fromDate:
+          type: "string"
+          format: "date"
+        toDate:
+          type: "string"
+          format: "date"
+        MTO:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MtoReleasable"
+        BCO:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/BcoReleasable"
+        CHA:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ChaReleasable"
+        OC:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OcReleasable"
+    GateReleasable:
+      type: "object"
+      properties:
+        dateOccurred:
+          type: "string"
+          format: "date"
+        port:
+          type: "string"
+        gate:
+          type: "string"
+        loadIn:
+          $ref: "#/components/schemas/BigDecimal"
+        loadOut:
+          $ref: "#/components/schemas/BigDecimal"
+        emptyIn:
+          $ref: "#/components/schemas/BigDecimal"
+        emptyOut:
+          $ref: "#/components/schemas/BigDecimal"
+    ThroughputDataModelV1:
+      type: "object"
+      properties:
+        portLocode:
+          type: "string"
+        portName:
+          type: "string"
+        fromDate:
+          type: "string"
+          format: "date"
+        toDate:
+          type: "string"
+          format: "date"
+        THROUGHPUT:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/GateReleasable"

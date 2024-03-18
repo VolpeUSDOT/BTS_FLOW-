@@ -1,0 +1,688 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Flow - API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Flow - API</h1>
+    <div class="app-desc">This OpenAPI specification document describes the details of the API for data collected under the Freight Logistics Optimization Works (FLOW) program. This data is managed under the stewardship of the USDOT Bureau of Transportation Statistics.</div>
+    <div class="app-desc">More information: <a href="https://www.bts.gov/flow">https://www.bts.gov/flow</a></div>
+    <div class="app-desc">Contact Info: <a href="btsdataportal@dot.gov">btsdataportal@dot.gov</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/flow-api/api</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Default">Default</a></h4>
+  <ul>
+  <li><a href="#apiV1PortGet"><code><span class="http-method">get</span> /api/v1/port</code></a></li>
+  <li><a href="#apiV1PortPortLocodeCoverageGet"><code><span class="http-method">get</span> /api/v1/port/{portLocode}/coverage</code></a></li>
+  <li><a href="#apiV1PortPortLocodeDailyGet"><code><span class="http-method">get</span> /api/v1/port/{portLocode}/daily</code></a></li>
+  <li><a href="#apiV1PortPortLocodeGet"><code><span class="http-method">get</span> /api/v1/port/{portLocode}</code></a></li>
+  <li><a href="#apiV1PortPortLocodeThroughputGet"><code><span class="http-method">get</span> /api/v1/port/{portLocode}/throughput</code></a></li>
+  </ul>
+
+  <h1><a name="Default">Default</a></h1>
+  <div class="method"><a name="apiV1PortGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/port</code></pre></div>
+    <div class="method-summary">Get port list (<span class="nickname">apiV1PortGet</span>)</div>
+    <div class="method-notes">Retrieve the list of ports for which data exists</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Port">Port</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "portLocode" : "portLocode",
+  "name" : "name"
+}, {
+  "portLocode" : "portLocode",
+  "name" : "name"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1PortPortLocodeCoverageGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/port/{portLocode}/coverage</code></pre></div>
+    <div class="method-summary">Get coverage information (<span class="nickname">apiV1PortPortLocodeCoverageGet</span>)</div>
+    <div class="method-notes">Retrieve information of the current coverage of supply and demand signals for a port or gateway</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">signal (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for signal </div>      <div class="param">startDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 start local date for range format: date</div>      <div class="param">endDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 end local date for range format: date</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CoverageDataModelV1">CoverageDataModelV1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "portLocode" : "portLocode",
+  "fromDate" : "2000-01-23",
+  "OC" : [ null, null ],
+  "toDate" : "2000-01-23",
+  "MTO" : [ {
+    "coverage" : "coverage",
+    "note" : "note",
+    "weekStart" : "2000-01-23",
+    "unlocode" : "unlocode",
+    "sector" : "BCO"
+  }, {
+    "coverage" : "coverage",
+    "note" : "note",
+    "weekStart" : "2000-01-23",
+    "unlocode" : "unlocode",
+    "sector" : "BCO"
+  } ],
+  "portName" : "portName",
+  "CHA" : [ null, null ],
+  "BCO" : [ null, null ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#CoverageDataModelV1">CoverageDataModelV1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1PortPortLocodeDailyGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/port/{portLocode}/daily</code></pre></div>
+    <div class="method-summary">Get daily data (<span class="nickname">apiV1PortPortLocodeDailyGet</span>)</div>
+    <div class="method-notes">Retrieve daily data on a supply and demand signals for a port or gateway</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">signal (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for signal </div>      <div class="param">movementType (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for movementType: RAIL, TRUCK, ALL default: ALL </div>      <div class="param">containerType (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for containerType: REEFER, DRY, ALL default: ALL </div>      <div class="param">haulageType (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier for haulageType: MH, CH, ALL default: ALL </div>      <div class="param">startDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 start local date for range format: date</div>      <div class="param">endDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 end local date for range format: date</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PortDataModelV1">PortDataModelV1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "portLocode" : "portLocode",
+  "fromDate" : "2000-01-23",
+  "OC" : [ {
+    "haulageType" : "haulageType",
+    "port" : "port",
+    "dateOccurred" : "2000-01-23",
+    "containerMovement" : "containerMovement"
+  }, {
+    "haulageType" : "haulageType",
+    "port" : "port",
+    "dateOccurred" : "2000-01-23",
+    "containerMovement" : "containerMovement"
+  } ],
+  "toDate" : "2000-01-23",
+  "MTO" : [ {
+    "port" : "port",
+    "teus" : { },
+    "dateOccurred" : "2000-01-23"
+  }, {
+    "port" : "port",
+    "teus" : { },
+    "dateOccurred" : "2000-01-23"
+  } ],
+  "portName" : "portName",
+  "CHA" : [ {
+    "port" : "port",
+    "dateOccurred" : "2000-01-23"
+  }, {
+    "port" : "port",
+    "dateOccurred" : "2000-01-23"
+  } ],
+  "BCO" : [ {
+    "port" : "port",
+    "dateOccurred" : "2000-01-23",
+    "containerMovement" : "containerMovement"
+  }, {
+    "port" : "port",
+    "dateOccurred" : "2000-01-23",
+    "containerMovement" : "containerMovement"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#PortDataModelV1">PortDataModelV1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1PortPortLocodeGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/port/{portLocode}</code></pre></div>
+    <div class="method-summary">Get information available at a port (<span class="nickname">apiV1PortPortLocodeGet</span>)</div>
+    <div class="method-notes">Retrieve the available signals for a port</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PortInformation">PortInformation</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "portLocode" : "portLocode",
+  "signals" : [ "signals", "signals" ],
+  "name" : "name"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#PortInformation">PortInformation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1PortPortLocodeThroughputGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/port/{portLocode}/throughput</code></pre></div>
+    <div class="method-summary">Get througput information (<span class="nickname">apiV1PortPortLocodeThroughputGet</span>)</div>
+    <div class="method-notes">Retrieve throughput (gate momevents) for a port or gateway</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">portLocode (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; UN/LOCODE for port location </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">startDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 start local date for range format: date</div>      <div class="param">endDate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ISO-8601 end local date for range format: date</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ThroughputDataModelV1">ThroughputDataModelV1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "portLocode" : "portLocode",
+  "fromDate" : "2000-01-23",
+  "THROUGHPUT" : [ {
+    "port" : "port",
+    "gate" : "gate",
+    "dateOccurred" : "2000-01-23",
+    "loadIn" : { }
+  }, {
+    "port" : "port",
+    "gate" : "gate",
+    "dateOccurred" : "2000-01-23",
+    "loadIn" : { }
+  } ],
+  "toDate" : "2000-01-23",
+  "portName" : "portName"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#ThroughputDataModelV1">ThroughputDataModelV1</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#BcoReleasable"><code>BcoReleasable</code></a></li>
+    <li><a href="#BigDecimal"><code>BigDecimal</code></a></li>
+    <li><a href="#ChaReleasable"><code>ChaReleasable</code></a></li>
+    <li><a href="#Coverage"><code>Coverage</code></a></li>
+    <li><a href="#CoverageDataModelV1"><code>CoverageDataModelV1</code></a></li>
+    <li><a href="#GateReleasable"><code>GateReleasable</code></a></li>
+    <li><a href="#MtoReleasable"><code>MtoReleasable</code></a></li>
+    <li><a href="#OcReleasable"><code>OcReleasable</code></a></li>
+    <li><a href="#Port"><code>Port</code></a></li>
+    <li><a href="#PortDataModelV1"><code>PortDataModelV1</code></a></li>
+    <li><a href="#PortInformation"><code>PortInformation</code></a></li>
+    <li><a href="#ThroughputDataModelV1"><code>ThroughputDataModelV1</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="BcoReleasable"><code>BcoReleasable</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">teus (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">container20 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">container40 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">containerMovement (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="BigDecimal"><code>BigDecimal</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ChaReleasable"><code>ChaReleasable</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">chassis20 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">chassis40 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Coverage"><code>Coverage</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">weekStart (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">unlocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">note (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">sector (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">BCO</div><div class="param-enum">OC</div><div class="param-enum">MTO</div><div class="param-enum">CHA</div><div class="param-enum">ALL</div><div class="param-enum">label</div>
+<div class="param">coverage (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CoverageDataModelV1"><code>CoverageDataModelV1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">portName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fromDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">toDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">MTO (optional)</div><div class="param-desc"><span class="param-type"><a href="#Coverage">array[Coverage]</a></span>  </div>
+<div class="param">BCO (optional)</div><div class="param-desc"><span class="param-type"><a href="#Coverage">array[Coverage]</a></span>  </div>
+<div class="param">CHA (optional)</div><div class="param-desc"><span class="param-type"><a href="#Coverage">array[Coverage]</a></span>  </div>
+<div class="param">OC (optional)</div><div class="param-desc"><span class="param-type"><a href="#Coverage">array[Coverage]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GateReleasable"><code>GateReleasable</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">gate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">loadIn (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">loadOut (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">emptyIn (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">emptyOut (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MtoReleasable"><code>MtoReleasable</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">teus (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OcReleasable"><code>OcReleasable</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">dateOccurred (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">teus (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">container20 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">container40 (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">containerMovement (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">haulageType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Port"><code>Port</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PortDataModelV1"><code>PortDataModelV1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">portName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fromDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">toDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">MTO (optional)</div><div class="param-desc"><span class="param-type"><a href="#MtoReleasable">array[MtoReleasable]</a></span>  </div>
+<div class="param">BCO (optional)</div><div class="param-desc"><span class="param-type"><a href="#BcoReleasable">array[BcoReleasable]</a></span>  </div>
+<div class="param">CHA (optional)</div><div class="param-desc"><span class="param-type"><a href="#ChaReleasable">array[ChaReleasable]</a></span>  </div>
+<div class="param">OC (optional)</div><div class="param-desc"><span class="param-type"><a href="#OcReleasable">array[OcReleasable]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PortInformation"><code>PortInformation</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">signals (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ThroughputDataModelV1"><code>ThroughputDataModelV1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">portLocode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">portName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fromDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">toDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">THROUGHPUT (optional)</div><div class="param-desc"><span class="param-type"><a href="#GateReleasable">array[GateReleasable]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
